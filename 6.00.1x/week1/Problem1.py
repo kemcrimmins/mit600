@@ -1,4 +1,4 @@
-s = 'ffff'
+s = 'azcbobobegghakl'
 
 vowels = 'aeiou'
 numVowels = 0
