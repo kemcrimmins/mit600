@@ -139,12 +139,12 @@ def hangman(secretWord):
             lettersGuessed += guessedLetter
             availableLetters = getAvailableLetters(lettersGuessed)
             
-
             if guessedLetter in secretWord:
                 print("Good guess: " + getGuessedWord(secretWord, lettersGuessed))
             else: 
                 print("Oops! That letter is not in my word: " + getGuessedWord(secretWord, lettersGuessed))
                 guessesLeft -= 1 
+                
         else:
             print("Oops! You've already guessed that letter: " + getGuessedWord(secretWord, lettersGuessed))
         
