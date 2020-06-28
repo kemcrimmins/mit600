@@ -125,21 +125,32 @@ def hangman(secretWord):
     availableLetters = getAvailableLetters("")
     
     while not isWordGuessed(secretWord, lettersGuessed):
-        if guessesLeft > 0:
-            guessedLetter = getGuess(availableLetters) # returns letter or empty string
-        else:
+        if guessesLeft == 0:        
             break # no more guesses
+               
+        # print game status
+        print("You have " + str(guessesLeft) + " guesses left.")
+        print("Available Letters: " + availableLetters)
+        
+        guessedLetter = input("Please guess a letter: ").lower()
+         
+        if guessedLetter in availableLetters: 
+            # updte variables
+            lettersGuessed += guessedLetter
+            availableLetters = getAvailableLetters(lettersGuessed)
             
-        if guessedLetter != "": # process valid guess
-            if guessedLetter in secretWord and guessedLetter in availableLetters:
+
+            if guessedLetter in secretWord:
                 print("Good guess: " + getGuessedWord(secretWord, lettersGuessed))
-                lettersGuessed += guessedLetter
-            elif guessedLetter not in secretWord:
+            else: 
                 print("Oops! That letter is not in my word: " + getGuessedWord(secretWord, lettersGuessed))
-            guessesLeft -= 1
+                guessesLeft -= 1 
         else:
             print("Oops! You've already guessed that letter: " + getGuessedWord(secretWord, lettersGuessed))
-            
+        
+        print("------------")
+        
+    # conclude game    
     if guessesLeft > 0:
         print("Congratulations, you won!")
     else:
