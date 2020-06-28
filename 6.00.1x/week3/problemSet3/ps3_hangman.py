@@ -135,7 +135,7 @@ def hangman(secretWord):
         guessedLetter = input("Please guess a letter: ").lower()
          
         if guessedLetter in availableLetters: 
-            # updte variables
+            # update variables
             lettersGuessed += guessedLetter
             availableLetters = getAvailableLetters(lettersGuessed)
             
