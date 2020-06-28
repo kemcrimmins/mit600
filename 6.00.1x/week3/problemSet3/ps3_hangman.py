@@ -154,7 +154,7 @@ def hangman(secretWord):
     if guessesLeft > 0:
         print("Congratulations, you won!")
     else:
-        print("Sorry, you ran out of guesses. The word was else.")
+        print("Sorry, you ran out of guesses. The word was " + secretWord + ".")
             
 
 
