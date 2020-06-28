@@ -65,6 +65,15 @@ def getGuessedWord(secretWord, lettersGuessed):
       what letters in secretWord have been guessed so far.
     '''
     # FILL IN YOUR CODE HERE...
+    correctGuesses = ""
+    
+    for letter in secretWord:
+        if letter in lettersGuessed:
+            correctGuesses += letter + " "
+        else:
+            correctGuesses += "_ "
+            
+    return correctGuesses
 
 
 
