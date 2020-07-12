@@ -22,7 +22,7 @@ def playGame(wordList):
     playerSelection = ""
     firstHand = True
     
-    while playerSelection != e:
+    while playerSelection != 'e':
         playerSelection = input('Enter n to deal a new hand, r to replay the last hand, or e to end game: ')
         if playerSelect == 'n':
             hand = dealHand(HAND_SIZE)
