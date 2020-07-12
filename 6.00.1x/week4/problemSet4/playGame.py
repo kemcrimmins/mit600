@@ -24,7 +24,9 @@ def playGame(wordList):
     
     while playerSelection != 'e':
         playerSelection = input('Enter n to deal a new hand, r to replay the last hand, or e to end game: ')
-        if playerSelection == 'n':
+        if playerSelection not in 'nre':
+            print('Invalid command.')
+        elif playerSelection == 'n':
             hand = dealHand(HAND_SIZE)
             firstHand = False
             playHand(hand, wordList, HAND_SIZE)
@@ -33,7 +35,4 @@ def playGame(wordList):
                 print('You have not played a hand yet. Please play a new hand first!')
             else:
                 playHand(hand, wordList, HAND_SIZE)
-        else:
-            print('Invalid command.')
-            
             
