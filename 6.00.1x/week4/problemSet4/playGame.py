@@ -24,11 +24,11 @@ def playGame(wordList):
     
     while playerSelection != 'e':
         playerSelection = input('Enter n to deal a new hand, r to replay the last hand, or e to end game: ')
-        if playerSelect == 'n':
+        if playerSelection == 'n':
             hand = dealHand(HAND_SIZE)
             firstHand = False
             playHand(hand, wordList, HAND_SIZE)
-        elif playerSelect == 'r':
+        elif playerSelection == 'r':
             if firstHand:
                 print('You have not played a hand yet. Please play a new hand first!')
             else:
