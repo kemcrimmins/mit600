@@ -175,7 +175,18 @@ def isValidWord(word, hand, wordList):
     hand: dictionary (string -> int)
     wordList: list of lowercase strings
     """
-    # TO DO ... <-- Remove this comment when you code this function
+    copy_hand = hand.copy() # make copy to avoid mutating hand
+    
+    for letter in word:     # verify that word comprised of letters in hand
+        if copy_hand.get(letter, 0) > 0:
+            copy_hand[letter] -= 1
+        else:
+            return False
+        
+    if word in wordList:
+        return True
+    
+    return False
 
 
 #
