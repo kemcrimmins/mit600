@@ -83,6 +83,20 @@ class Hand(object):
         returns: Boolean (if the word was or was not made)
         """
         # Your code here
+        copy_hand = self.hand.copy() # make copy to avoid mutating hand prior to test
+    
+        for letter in word:     # verify that word comprised of letters in hand
+            if copy_hand.get(letter, 0) > 0:
+                copy_hand[letter] -= 1
+            else:
+                return False
+    
+        for letter in word:
+            self.hand[letter] -= 1
+            
+        return True
+            
+       
         raise NotImplementedError()
 
     
