@@ -244,7 +244,32 @@ class CiphertextMessage(Message):
         Returns: a tuple of the best shift value used to decrypt the message
         and the decrypted message text using that shift value
         '''
-        pass #delete this line and replace with your code here
+        
+        # initialize variables for tracking results
+        mostWords = 0  
+        bestShift = 0
+        bestMsg = ''
+        shift = 0
+        
+        while shift < 27:
+            decryptMsg = self.apply_shift(26 - shift)
+            numWords = 0 # variable for number of words in current shift
+            
+            for potentialWord in decryptMsg.split():  # check each potential word
+                if is_word(self.valid_words, potentialWord):
+                    numWords += 1
+            
+            if numWords > mostWords: # if we've found more words update winners
+                mostWords = numWords 
+                bestShift = shift
+                bestMsg = decryptMsg[:]
+            
+            shift += 1 # increment to next shift value
+            
+        if bestShift == 0: 
+            return (0, bestMsg)
+        else:
+            return (26 - bestShift, bestMsg)  # best shift to _decrypt_ and bestMsg
 
 #Example test case (PlaintextMessage)
 plaintext = PlaintextMessage('hello', 2)
