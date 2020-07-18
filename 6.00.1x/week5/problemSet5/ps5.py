@@ -167,7 +167,12 @@ class PlaintextMessage(Message):
         Hint: consider using the parent class constructor so less 
         code is repeated
         '''
-        pass #delete this line and replace with your code here
+        Message.__init__(self, text)
+        self.message_text = text
+        self.valid_words = self.get_valid_words()
+        self.shift = shift
+        self.encrypting_dict = self.build_shift_dict(shift)
+        self.get_message_text_encrypted = self.apply_shift(shift)
 
     def get_shift(self):
         '''
