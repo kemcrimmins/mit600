@@ -209,7 +209,7 @@ class PlaintextMessage(Message):
 
         Returns: nothing
         '''
-        pass #delete this line and replace with your code here
+        self.shift = shift
 
 
 class CiphertextMessage(Message):
