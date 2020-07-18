@@ -270,6 +270,12 @@ class CiphertextMessage(Message):
             return (0, bestMsg)
         else:
             return (26 - bestShift, bestMsg)  # best shift to _decrypt_ and bestMsg
+        
+def decrypt_story():
+    story = get_story_string()
+    cipherStory = CiphertextMessage(story)
+    return cipherStory.decrypt_message()
+
 
 #Example test case (PlaintextMessage)
 plaintext = PlaintextMessage('hello', 2)
