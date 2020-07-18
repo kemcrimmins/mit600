@@ -172,7 +172,7 @@ class PlaintextMessage(Message):
         self.valid_words = self.get_valid_words()
         self.shift = shift
         self.encrypting_dict = self.build_shift_dict(shift)
-        self.get_message_text_encrypted = self.apply_shift(shift)
+        self.message_text_encrypted = self.apply_shift(shift)
 
     def get_shift(self):
         '''
