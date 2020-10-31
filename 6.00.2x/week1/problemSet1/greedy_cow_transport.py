@@ -24,7 +24,7 @@ def greedy_cow_transport(cows_dict, weight_limit):
     
     trips = [] 
     
-    while len(cows) > 0: #and cows[-1][1] <= weight_limit: #cows remain that can fit
+    while len(cows) > 0:
         current_weight = 0
         this_trip = []
         cow_location = []
