@@ -24,7 +24,7 @@ def order_cows(cows_dict):
     Returns
     -------
     list of tuples
-        tuples of (<cow_name_, <weight of cow>)
+        tuples of (<cow_name>, <weight of cow>)
         tuples orderd by weight from heaviest to lightest.
     """
     
