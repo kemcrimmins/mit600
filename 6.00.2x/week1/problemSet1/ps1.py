@@ -131,28 +131,18 @@ def brute_force_cow_transport(cows,limit=10):
     # TODO: Your code here
     best_partition = cows.copy() # initialize best to one cow per trip
     for partition in (get_partitions(cows)):
-        if len(partition) < len(best_partition): #if current partition has fewer trips than best
+        if len(partition) <= len(best_partition): #if current partition has fewer trips than best
             for trip in partition: #check that all trips in partition are valid
                 trip_weight = 0
                 valid_partition = True
                 for cow in trip:
-                    trip_weight += cow[1]
+                    trip_weight += cows[cow]
                 if trip_weight > limit: # current partition is invalid
                     valid_partition = False
                     break
             if valid_partition:
-                best_partition = partition.copy()
-            
-    # convert best_partition into list of lists containing names of cows
-    # transported on a particular tirp and a list containing all the trips
-    best_transport = []
-    for trip in best_partition:
-        cows = []
-        for cow in trip:
-            cows.append(cow[0])
-        best_transport.append(cows)
-        
-    return best_transport
+                best_partition = partition.copy()        
+    return best_partition
 
         
 # Problem 3
@@ -180,10 +170,12 @@ lines to print the result of your problem.
 """
 
 cows = load_cows("ps1_cow_data.txt")
-limit=100
-print(cows)
+limit=10
+#print(cows)
 
-print(greedy_cow_transport(cows, limit))
-print(brute_force_cow_transport(cows, limit))
+#print(greedy_cow_transport(cows, limit))
+print(brute_force_cow_transport({'Lotus': 40, 'Horns': 25, 'Miss Bella': 25, 'Boo': 20, 'MooMoo': 50, 'Milkshake': 40}, 100))
+print(brute_force_cow_transport({'Daisy': 50, 'Betsy': 65, 'Buttercup': 72}, 75))
+print(brute_force_cow_transport({'Starlight': 54, 'Buttercup': 11, 'Betsy': 39, 'Luna': 41}, 145))
 
 
