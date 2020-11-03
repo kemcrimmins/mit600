@@ -1,4 +1,4 @@
-###########################
+##########################
 # 6.00.2x Problem Set 1: Space Cows 
 
 from ps1_partition import get_partitions
@@ -32,7 +32,7 @@ def load_cows(filename):
 
 
 # Problem 1
-def greedy_cow_transport(cows,limit=10):
+def greedy_cow_transport(cows_dict,weight_limit=10):
     """
     Uses a greedy heuristic to determine an allocation of cows that attempts to
     minimize the number of spaceship trips needed to transport all the cows. The
@@ -46,8 +46,8 @@ def greedy_cow_transport(cows,limit=10):
     Does not mutate the given dictionary of cows.
 
     Parameters:
-    cows - a dictionary of name (string), weight (int) pairs
-    limit - weight limit of the spaceship (an int)
+    cows_dict - a dictionary of name (string), weight (int) pairs
+    weight_limit - weight limit of the spaceship (an int)
     
     Returns:
     A list of lists, with each inner list containing the names of cows
@@ -55,7 +55,56 @@ def greedy_cow_transport(cows,limit=10):
     trips
     """
     # TODO: Your code here
-    pass
+     # convert cows_dict to list of tuples ordered by weight
+    cows = order_cows(cows_dict)
+    
+    trips = [] 
+    
+    while len(cows) > 0:
+        current_weight = 0
+        this_trip = []
+        cow_location = []
+
+        for cow in cows: # build up current trip
+            
+            if current_weight + cow[1] <= weight_limit:
+                current_weight += cow[1]
+                this_trip.append(cow[0])
+                cow_location.append(cows.index(cow))
+                
+        trips.append(this_trip) # update list of trips
+        
+        # remove this_trip from cows
+        cow_location.reverse() # reverse lcations to remove from end to start
+        for location in cow_location: 
+            cows.remove(cows[location])
+
+    return trips
+
+#Helper function
+def order_cows(cows_dict):
+   """    
+    Parameters
+    ----------
+    cows_dict : dictionary
+        key = cow_name (string)
+        value = weight of cow
+
+    Returns
+    -------
+    list of tuples
+        tuples of (<cow_name>, <weight of cow>)
+        tuples orderd by weight from heaviest to lightest.
+    """
+    
+   cows = []
+   for cow in cows_dict:
+       cows.append((cow, cows_dict[cow]))
+        
+   cows.sort(reverse=True, key = lambda x : x[1])
+   
+   return cows
+
 
 
 # Problem 2
@@ -80,7 +129,30 @@ def brute_force_cow_transport(cows,limit=10):
     trips
     """
     # TODO: Your code here
-    pass
+    best_partition = cows.copy() # initialize best to one cow per trip
+    for partition in (get_partitions(cows)):
+        if len(partition) < len(best_partition): #if current partition has fewer trips than best
+            for trip in partition: #check that all trips in partition are valid
+                trip_weight = 0
+                valid_partition = True
+                for cow in trip:
+                    trip_weight += cow[1]
+                if trip_weight > limit: # current partition is invalid
+                    valid_partition = False
+                    break
+            if valid_partition:
+                best_partition = partition.copy()
+            
+    # convert best_partition into list of lists containing names of cows
+    # transported on a particular tirp and a list containing all the trips
+    best_transport = []
+    for trip in best_partition:
+        cows = []
+        for cow in trip:
+            cows.append(cow[0])
+        best_transport.append(cows)
+        
+    return best_transport
 
         
 # Problem 3
