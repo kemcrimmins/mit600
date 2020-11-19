@@ -301,7 +301,7 @@ def runSimulation(num_robots, speed, width, height, min_coverage, num_trials,
     return num_steps/num_trials/num_robots
 
 # Uncomment this line to see how much your simulation takes on average
-#print(runSimulation(2, 1.0, 8, 8, 0.80, 30, StandardRobot))
+print(runSimulation(4, 1.0, 10, 10, 0.80, 30, StandardRobot))
 
 
 # === Problem 5
@@ -326,7 +326,7 @@ class RandomWalkRobot(Robot):
         
         self.direction = random.randint(0, 361) # change robot direction
 
-#print(runSimulation(2, 1.0, 8, 8, 0.80, 30, RandomWalkRobot))
+print(runSimulation(4, 1.0, 10, 10, 0.80, 30, RandomWalkRobot))
 
 def showPlot1(title, x_label, y_label):
     """
@@ -337,8 +337,8 @@ def showPlot1(title, x_label, y_label):
     times2 = []
     for num_robots in num_robot_range:
         print("Plotting", num_robots, "robots...")
-        times1.append(runSimulation(num_robots, 1.0, 20, 20, 0.8, 20, StandardRobot))
-        times2.append(runSimulation(num_robots, 1.0, 20, 20, 0.8, 20, RandomWalkRobot))
+        times1.append(runSimulation(num_robots, 1.0, 10, 10, 0.8, 20, StandardRobot))
+        times2.append(runSimulation(num_robots, 1.0, 10, 10, 0.8, 20, RandomWalkRobot))
     pylab.plot(num_robot_range, times1)
     pylab.plot(num_robot_range, times2)
     pylab.title(title)
@@ -379,7 +379,7 @@ def showPlot2(title, x_label, y_label):
 #     plot.
 #
 #       (... your call here ...)
-#
+#showPlot1("Plot 1", "aspect_ratio", "mean steps")
 
 #
 # 2) Write a function call to showPlot2 that generates an appropriately-labeled
@@ -387,3 +387,4 @@ def showPlot2(title, x_label, y_label):
 #
 #       (... your call here ...)
 #
+#showPlot2("plot 2", "??", "??")
