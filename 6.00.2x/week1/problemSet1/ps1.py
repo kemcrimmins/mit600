@@ -160,7 +160,17 @@ def compare_cow_transport_algorithms():
     Does not return anything.
     """
     # TODO: Your code here
-    pass
+    start = time.time()
+    ## code to be timed
+    greedy_cow_transport(cows)
+    end = time.time()
+    print("greedy time is " + str(end - start))
+    
+    start = time.time()
+    ## code to be timed
+    brute_force_cow_transport(cows)
+    end = time.time()
+    print("brute time is " + str(end - start))
 
 
 """
@@ -174,8 +184,9 @@ limit=10
 #print(cows)
 
 #print(greedy_cow_transport(cows, limit))
-print(brute_force_cow_transport({'Lotus': 40, 'Horns': 25, 'Miss Bella': 25, 'Boo': 20, 'MooMoo': 50, 'Milkshake': 40}, 100))
-print(brute_force_cow_transport({'Daisy': 50, 'Betsy': 65, 'Buttercup': 72}, 75))
-print(brute_force_cow_transport({'Starlight': 54, 'Buttercup': 11, 'Betsy': 39, 'Luna': 41}, 145))
+# print(brute_force_cow_transport({'Lotus': 40, 'Horns': 25, 'Miss Bella': 25, 'Boo': 20, 'MooMoo': 50, 'Milkshake': 40}, 100))
+# print(brute_force_cow_transport({'Daisy': 50, 'Betsy': 65, 'Buttercup': 72}, 75))
+# print(brute_force_cow_transport({'Starlight': 54, 'Buttercup': 11, 'Betsy': 39, 'Luna': 41}, 145))
+compare_cow_transport_algorithms()
 
 
