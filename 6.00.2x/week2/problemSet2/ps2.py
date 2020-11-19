@@ -182,6 +182,7 @@ class Robot(object):
         speed: a float (speed > 0)
         """
         #raise NotImplementedError
+        self.room = room
         self.position = room.getRandomPosition()
         self.speed = speed
         self.direction = random.randint(0, 361)
@@ -251,11 +252,19 @@ class StandardRobot(Robot):
         Move the robot to a new position and mark the tile it is on as having
         been cleaned.
         """
-        raise NotImplementedError
+        #raise NotImplementedError
+        position = self.getRobotPosition()
+        newPosition = position.getNewPosition(self.direction, self.speed)
+        if self.room.isPositionInRoom(newPosition): # if the move is valid, update and clean tile
+            self.position = newPosition
+            self.room.cleanTileAtPosition(newPosition)
+        else:
+            self.direction = random.randint(0, 361) # change robot direction
+            
 
 
 # Uncomment this line to see your implementation of StandardRobot in action!
-##testRobotMovement(StandardRobot, RectangularRoom)
+testRobotMovement(StandardRobot, RectangularRoom)
 
 
 # === Problem 4
