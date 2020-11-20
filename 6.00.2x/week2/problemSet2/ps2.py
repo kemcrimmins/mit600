@@ -185,7 +185,7 @@ class Robot(object):
         self.room = room
         self.position = room.getRandomPosition()
         self.speed = speed
-        self.direction = random.randint(0, 365)
+        self.direction = random.randint(0, 360)
         
         room.cleanTileAtPosition(self.position) # mark initial tile as clean
 
@@ -259,7 +259,7 @@ class StandardRobot(Robot):
             self.position = newPosition
             self.room.cleanTileAtPosition(newPosition)
         else:
-            self.direction = random.randint(0, 361) # change robot direction
+            self.direction = random.randint(0, 360) # change robot direction
             
 
 
@@ -324,7 +324,7 @@ class RandomWalkRobot(Robot):
             self.position = newPosition
             self.room.cleanTileAtPosition(newPosition)
         
-        self.direction = random.randint(0, 361) # change robot direction
+        self.direction = random.randint(0, 360) # change robot direction
 
 print(runSimulation(4, 1.0, 10, 10, 0.80, 30, RandomWalkRobot))
 
