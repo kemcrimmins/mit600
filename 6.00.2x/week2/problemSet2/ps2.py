@@ -185,7 +185,7 @@ class Robot(object):
         self.room = room
         self.position = room.getRandomPosition()
         self.speed = speed
-        self.direction = random.randint(0, 361)
+        self.direction = random.randint(0, 365)
         
         room.cleanTileAtPosition(self.position) # mark initial tile as clean
 
