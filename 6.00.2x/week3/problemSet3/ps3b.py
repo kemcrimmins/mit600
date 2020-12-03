@@ -244,8 +244,10 @@ class ResistantVirus(SimpleVirus):
         returns: True if this virus instance is resistant to the drug, False
         otherwise.
         """
-        
-        return self.resistances[drug]
+        if drug in self.resistances:
+            return self.resistances[drug]
+        else:
+            return False
 
 
     def reproduce(self, popDensity, activeDrugs):
@@ -330,8 +332,9 @@ class TreatedPatient(Patient):
 
         maxPop: The  maximum virus population for this patient (an integer)
         """
-
-        # TODO
+        Patient.__init__(self, viruses, maxPop)
+        
+        self.drugs = []
 
 
     def addPrescription(self, newDrug):
@@ -344,8 +347,8 @@ class TreatedPatient(Patient):
 
         postcondition: The list of drugs being administered to a patient is updated
         """
-
-        # TODO
+        if newDrug not in self.drugs:
+            self.drugs.append(newDrug)
 
 
     def getPrescriptions(self):
@@ -356,7 +359,7 @@ class TreatedPatient(Patient):
         patient.
         """
 
-        # TODO
+        return self.drugs
 
 
     def getResistPop(self, drugResist):
@@ -371,7 +374,17 @@ class TreatedPatient(Patient):
         drugs in the drugResist list.
         """
 
-        # TODO
+        resistPop = 0
+        for virus in self.viruses:
+            resistant = True # Assume resistant until proven otherwise
+            
+            for drug in drugResist:
+                if drug in virus.resistances and not virus.resistances[drug]: #virus isn't resistant to this drug
+                    resistant = False
+            if resistant:
+                resistPop += 1
+                
+        return resistPop
 
 
     def update(self):
