@@ -215,8 +215,8 @@ class ResistantVirus(SimpleVirus):
         the probability of the offspring acquiring or losing resistance to a drug.
         """
         SimpleVirus.__init__(self, maxBirthProb, clearProb)
-        self.maxBirthProb = maxBirthProb
-        self.clearProb = clearProb
+        # self.maxBirthProb = maxBirthProb
+        # self.clearProb = clearProb
         self.resistances = resistances
         self.mutProb = mutProb
 
@@ -292,21 +292,25 @@ class ResistantVirus(SimpleVirus):
         maxBirthProb and clearProb values as this virus. Raises a
         NoChildException if this virus particle does not reproduce.
         """
-
-        # resistant = True # assume the virus is resistant until shown otherwise
+        ## This doesn't work. Got 6/10 for initializing correclty....
+        resistant = True # assume the virus is resistant until shown otherwise
         
-        # for drug in activeDrugs: # test for resistances
-        #     if not self.resistances[drug]:
-        #         resistant = False
+        for drug in activeDrugs: # test for resistances
+            if not self.resistances[drug]:
+                resistant = False
                 
-        # if  resistant:
-        #     new_resistances = self.resistances.copy()
-        #     if random.random() <= self.maxBirthProb * (1 - popDensity):
-        #         for drug in new_resistances:
-        #             if random.random() <= self.mutProb: # if meets mutation prob, flip the resistance
-        #                 new_resistances[drug] = new_resistances[not drug]
-
-        # return ResistantVirus(self.maxBirth, self.clearProb, new_resistances, self.mutProb)
+        if resistant:
+            new_resistances = self.resistances.copy()
+            if random.random() <= self.maxBirthProb * (1 - popDensity):
+                for drug in new_resistances:
+                    if random.random() <= self.mutProb: # if meets mutation prob, flip the resistance
+                        new_resistances[drug] = not new_resistances[drug]
+                        
+            if random.random() <= self.maxBirthProb * (1 - popDensity): # create new virus if meets threshold
+                return ResistantVirus(self.maxBirthProb, self.clearProb, new_resistances, self.mutProb)
+            else:
+                raise NoChildException() # Did not reproduce
+        raise NoChildException() # Did not reproduce
             
 
 class TreatedPatient(Patient):
