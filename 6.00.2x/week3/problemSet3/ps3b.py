@@ -214,21 +214,24 @@ class ResistantVirus(SimpleVirus):
         mutProb: Mutation probability for this virus particle (a float). This is
         the probability of the offspring acquiring or losing resistance to a drug.
         """
-
-        # TODO
+        SimpleVirus.__init__(self, maxBirthProb, clearProb)
+        self.maxBirthProb = maxBirthProb
+        self.clearProb = clearProb
+        self.resistances = resistances
+        self.mutProb = mutProb
 
 
     def getResistances(self):
         """
         Returns the resistances for this virus.
         """
-        # TODO
+        return self.resistances
 
     def getMutProb(self):
         """
         Returns the mutation probability for this virus.
         """
-        # TODO
+        return self.mutProb
 
     def isResistantTo(self, drug):
         """
@@ -242,7 +245,7 @@ class ResistantVirus(SimpleVirus):
         otherwise.
         """
         
-        # TODO
+        return self.resistances[drug]
 
 
     def reproduce(self, popDensity, activeDrugs):
@@ -252,7 +255,7 @@ class ResistantVirus(SimpleVirus):
 
         A virus particle will only reproduce if it is resistant to ALL the drugs
         in the activeDrugs list. For example, if there are 2 drugs in the
-        activeDrugs list, and the virus particle is resistant to 1 or no drugs,
+        activeDrugs list, and the virus particle is resistant to 1 or no drugs, ## shouldn't this be "1 or 2"?
         then it will NOT reproduce.
 
         Hence, if the virus is resistant to all drugs
@@ -290,8 +293,20 @@ class ResistantVirus(SimpleVirus):
         NoChildException if this virus particle does not reproduce.
         """
 
-        # TODO
+        # resistant = True # assume the virus is resistant until shown otherwise
+        
+        # for drug in activeDrugs: # test for resistances
+        #     if not self.resistances[drug]:
+        #         resistant = False
+                
+        # if  resistant:
+        #     new_resistances = self.resistances.copy()
+        #     if random.random() <= self.maxBirthProb * (1 - popDensity):
+        #         for drug in new_resistances:
+        #             if random.random() <= self.mutProb: # if meets mutation prob, flip the resistance
+        #                 new_resistances[drug] = new_resistances[not drug]
 
+        # return ResistantVirus(self.maxBirth, self.clearProb, new_resistances, self.mutProb)
             
 
 class TreatedPatient(Patient):
