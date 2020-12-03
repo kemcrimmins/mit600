@@ -157,7 +157,7 @@ class Patient(object):
         popDensity = float(len(surviving_viruses)/self.getMaxPop())
         new_viruses = []
         for virus in surviving_viruses:
-            new_viruses.append(virus.reproduce(popDensity))
+            new_viruses.append(virus.reproduce(popDensity)) ## in prt b. prob 1 this fails exception test and patient with virus that is never cleared and always reproduces.
         
         surviving_viruses.extend(new_viruses)
         self.viruses = surviving_viruses
