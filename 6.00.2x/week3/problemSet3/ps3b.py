@@ -81,9 +81,8 @@ class SimpleVirus(object):
         """
 
         if random.random() <= self.maxBirthProb * (1 - popDensity):
-            return SimpleVirus(self.maxBirthProb, self.clearProb)
-        else:
-            raise NoChildException()
+            return SimpleVirus(self.maxBirthProb, self.clearProb)        
+        raise NoChildException()
 
 
 
@@ -379,8 +378,14 @@ class TreatedPatient(Patient):
             resistant = True # Assume resistant until proven otherwise
             
             for drug in drugResist:
-                if drug in virus.resistances and not virus.resistances[drug]: #virus isn't resistant to this drug
+                if drug not in virus.resistances: #virus hasn't been exposed to drug
                     resistant = False
+                    break
+                elif virus.resistances[drug] == False:
+                    resistant = False
+                    break
+                # else:
+                #     resistant = True
             if resistant:
                 resistPop += 1
                 
