@@ -18,7 +18,7 @@ class NoChildException(Exception):
 '''
 End helper code
 '''
-
+random.seed(0)  # set the random seed to match the pset tests
 #
 # PROBLEM 1
 #
