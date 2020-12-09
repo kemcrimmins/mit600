@@ -148,7 +148,13 @@ def r_squared(y, estimated):
         a float for the R-squared error term
     """
     # TODO
-    pass
+    import numpy as np # import for the grader
+    estimated_arr = np.array(estimated)
+    y_arr = np.array(y)
+    error = ((estimated_arr - y_arr)**2).sum()
+    meanError = error/len(y_arr)
+    return 1 - (meanError/np.var(y_arr))
+
 
 # Problem 3
 def evaluate_models_on_training(x, y, models):
@@ -173,19 +179,26 @@ def evaluate_models_on_training(x, y, models):
         None
     """
     # TODO
-    pass
+    pylab.plot(x, y, 'o', label = 'Data Points') # lot the data points
+    
+    # plot models for best fit
+    for model in models:
+        y_est = pylab.polyval(model, x)
+        pylab.plot(x, y_est, 'r--', label = model)
+        print(r_squared(y, y_est ))
+
 
 
 ### Begining of program
-# raw_data = Climate('data.csv')
+raw_data = Climate('data.csv')
 
-# # Problem 3
-# y = []
-# x = INTERVAL_1
-# for year in INTERVAL_1:
-#     y.append(raw_data.get_daily_temp('BOSTON', 1, 10, year))
-# models = generate_models(x, y, [1])
-# evaluate_models_on_training(x, y, models)
+# Problem 3
+y = []
+x = INTERVAL_1
+for year in INTERVAL_1:
+    y.append(raw_data.get_daily_temp('BOSTON', 1, 10, year))
+models = generate_models(x, y, [1])
+evaluate_models_on_training(x, y, models)
 
 
 # # Problem 4: FILL IN MISSING CODE TO GENERATE y VALUES
