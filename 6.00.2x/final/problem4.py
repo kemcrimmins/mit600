@@ -57,6 +57,30 @@ def getAverage(die, numRolls, numTrials):
       - Returns the mean calculated
     """
     # TODO
+    trial_streaks = []
+    for trial in range(numTrials):
+        rolls = []
+        for i in range(numRolls):
+            rolls.append(die.roll())
+            
+        # find long_streak
+        long_streak = 1
+        current_streak = 1
+        for i in range(1, len(rolls)):
+            if rolls[i] == rolls[i - 1]:
+                current_streak += 1
+            else:
+                if current_streak > long_streak:
+                    long_streak = current_streak
+                current_streak = 1
+                
+        trial_streaks.append(long_streak)
+        
+        makeHistogram(trial_streaks, 10, "trial", "streak length")
+        
+        return sum(trial_streaks)/len(trial_streaks)
+        
+        
     
 # One test case
-print getAverage(Die([1,2,3,4,5,6,6,6,7]), 500, 10000)
+print(getAverage(Die([1]), 10, 1000))
