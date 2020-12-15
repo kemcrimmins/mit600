@@ -86,4 +86,13 @@ def runSimulation(numSteps):
     """
 
     # TO DO
-    pass
+    rabbit_populations = []
+    fox_populations = []
+    
+    for step in range(numSteps):
+        rabbitGrowth()
+        foxGrowth()
+        rabbit_populations.append(CURRENTRABBITPOP)
+        fox_populations.append(CURRENTFOXPOP)
+        
+    return (rabbit_populations, fox_populations)
