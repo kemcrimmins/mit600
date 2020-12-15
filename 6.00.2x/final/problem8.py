@@ -63,14 +63,14 @@ def foxGrowth():
                 if random.random() <= 1/3: #does the fox breed?
                  fox_population += 1   
             else:
-                if fox_population() > 10: # fox population never goes below 10
+                if fox_population > 10: # fox population never goes below 10
                     if random.random() <= 0.1: # does a fox die?    
                         fox_population -= 1
         else: # there aren't enough rabbits to catch one! Oh, noes.
-            if fox_population() > 10: # fox population never goes below 10
+            if fox_population > 10: # fox population never goes below 10
                     if random.random() <= 0.1: # does a fox die?    
                         fox_population -= 1
-  
+    CURRENTFOXPOP = fox_population
         
             
 def runSimulation(numSteps):
