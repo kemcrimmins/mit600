@@ -37,7 +37,7 @@ def makeHistogram(values, numBins, xLabel, yLabel, title=None):
         does not title the figure
     """
     # TODO
-    pylab.hist(values, numBins)
+    pylab.hist(values, bins = numBins)
     pylab.xlabel(xLabel)
     pylab.ylabel(yLabel)
     if title:
@@ -76,11 +76,13 @@ def getAverage(die, numRolls, numTrials):
                 
         trial_streaks.append(long_streak)
         
-        makeHistogram(trial_streaks, 10, "trial", "streak length")
+    makeHistogram(trial_streaks, 10, "trial", "streak length")
         
-        return sum(trial_streaks)/len(trial_streaks)
+    return sum(trial_streaks)/len(trial_streaks)
         
         
     
 # One test case
-print(getAverage(Die([1]), 10, 1000))
+print(getAverage(Die([1,1]), 10, 1000))
+
+# print(getAverage(Die([1,2,3,4,5,6,6,6,7]), 500, 100000))

@@ -11,8 +11,8 @@ import pylab
 
 # Global Variables
 MAXRABBITPOP = 1000
-CURRENTRABBITPOP = 500
-CURRENTFOXPOP = 30
+CURRENTRABBITPOP = 50
+CURRENTFOXPOP = 300
 
 def rabbitGrowth():
     """ 
@@ -95,4 +95,15 @@ def runSimulation(numSteps):
         rabbit_populations.append(CURRENTRABBITPOP)
         fox_populations.append(CURRENTFOXPOP)
         
+    # pylab.plot(range(numSteps), rabbit_populations)
+    # pylab.plot(range(numSteps), fox_populations)
+    
+    coeff = pylab.polyfit(range(len(fox_populations)), fox_populations, 2)
+    pylab.plot(pylab.polyval(coeff, range(len(fox_populations))))
+    
+    coeff = pylab.polyfit(range(len(rabbit_populations)), rabbit_populations, 2)
+    pylab.plot(pylab.polyval(coeff, range(len(rabbit_populations))))
+    
     return (rabbit_populations, fox_populations)
+
+runSimulation(200)
